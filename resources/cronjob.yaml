@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: delete-clusters-job
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: shebert
+          containers:
+            - name: delete-clusters
+              image: quay.io/scoheb/cluster-utils:bf2d850a98b4a7be1fa80ea57dced2d9489d05f2c584edb5ff43bdd9f30c738f
+              envFrom:
+                - secretRef:
+                    name: aws-credentials
+                - secretRef:
+                    name: oc-credentials
+                - secretRef:
+                    name: slack-bot-credentials
+          restartPolicy: Never
