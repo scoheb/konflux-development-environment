@@ -2,6 +2,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: delete-clusters-job
+  namespace: stonesoup
 spec:
   schedule: "*/5 * * * *"
   concurrencyPolicy: Forbid
@@ -12,7 +13,7 @@ spec:
           serviceAccountName: shebert
           containers:
             - name: delete-clusters
-              image: quay.io/scoheb/cluster-utils:bf2d850a98b4a7be1fa80ea57dced2d9489d05f2c584edb5ff43bdd9f30c738f
+              image: quay.io/scoheb/cluster-utils:f1caab9006ad328a941b8a6460c66e4cdcaefc9f0b64e8d4328ada33a890b407
               envFrom:
                 - secretRef:
                     name: aws-credentials

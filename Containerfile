@@ -2,6 +2,7 @@ FROM quay.io/konflux-ci/release-service-utils:7d75854c27afb4ece1e7e5428bca079922
 
 COPY delete-expired-clusters.sh /usr/local/bin/delete-expired-clusters.sh
 COPY hypershift-delete-cluster.sh /usr/local/bin/hypershift-delete-cluster.sh
+COPY notify.sh /usr/local/bin/notify.sh
 
 # Install AWSCLI
 RUN pip install --upgrade pip && \
